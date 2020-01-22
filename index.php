@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<?php 
+    define('ROOT_PATH', dirname(__FILE__));
+
+    include_once ROOT_PATH . '/controller/ControllerProjetoDeLeiOrdinaria.php'; 
+        
+    $projetos = ControllerProjetoDeLeiOrdinaria::buscarTodos();
+
+    $quantidadeProjetosPorPagina = 12;
+    $atual                       = (isset($_GET['pg'])) ? intval($_GET['pg']) : 1;
+    $quantidadePaginas           = 14;
+    $paginaProjetos              = $projetos->offSetGet($atual - 1);
+?>
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8"/>
@@ -23,7 +35,42 @@
     </div>
 
     <div data-panes>
-		<div>Projetos... </div>
+		<div>
+            <table class="pure-table">
+                <thead>
+                    <tr>
+                        <th>Nº</th>
+                        <th>AUTOR</th>
+                        <th>ASSUNTO</th>
+                        <th>ANOTAÇÃO</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+            
+                    <?php foreach($paginaProjetos as $i => $projeto): ?>
+                    <tr <?php if($i % 2 == 1) echo "class=\"pure-table-odd\"" ?> >
+                    
+                        <td> <?php echo "<a href=\"".$projeto->getAnexo()."\" title=\"Clique para abrir o anexo.\" target=\"_blank\">".$projeto->getNumeroLei()."</a>" ?> </td>
+                        <td> <?php echo "<a href=\"".$projeto->getAnexo()."\" title=\"Clique para abrir o anexo.\" target=\"_blank\">".$projeto->getAutor()."</a>" ?> </td>
+                        <td> <?php echo "<a href=\"".$projeto->getAnexo()."\" title=\"Clique para abrir o anexo.\" target=\"_blank\">".$projeto->getAssunto()."</a>" ?> </td>
+                        <td> <?php echo "<a href=\"".$projeto->getAnexo()."\" title=\"Clique para abrir o anexo.\" target=\"_blank\">".$projeto->getStatus()."</a>" ?> </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <div class="paginacao">
+            <?php  
+                for($i = 1; $i < $quantidadePaginas; $i++):
+                    if($i ==  $atual):
+                        echo "<a href='#'>[".$i."]  ";
+                    else:
+                        echo "<a href='?pg=".$i."'>".$i."   </a>";
+                    endif;
+                endfor;
+            ?>
+            </div>
+        </div>
 		<div>Vereadores | Quantidade de projetos por status...</div>
 	</div>
 

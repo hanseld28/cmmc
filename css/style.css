@@ -6,6 +6,9 @@
 body {
 	padding: 0 40px;
 }
+a {
+	text-decoration: none;
+}
 
 header{
     display: flex;
