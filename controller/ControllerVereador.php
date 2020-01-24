@@ -25,7 +25,7 @@ class ControllerVereador
         {
             $this->carregarVereadores();
         }
-
+        
         return $this->daoVereador->recuperarListaDeVereadoresDoArquivo();
     }
 
@@ -41,6 +41,11 @@ class ControllerVereador
     public function consultarProjetosPeloIdDoVereador($id)
     {
         return $this->daoVereador->consultarProjetosPeloIdDoVereador($id);
+    }
+
+    public function classificarProjetosDoVereadorPorStatus()
+    {
+        return $this->daoVereador->classificarProjetosDoVereadorPorStatus();
     }
 }
 
