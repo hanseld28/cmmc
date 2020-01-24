@@ -1,1 +1,1 @@
-# Contém os arquivos com os dados [Vereadores/Projetos]
+# Contêm os arquivos com os dados [Vereadores/Projetos]
