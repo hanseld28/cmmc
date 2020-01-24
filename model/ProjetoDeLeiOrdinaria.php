@@ -2,8 +2,9 @@
 
 class ProjetoDeLeiOrdinaria
 {
+    private $id;
     private $numeroLei;
-    private $autor; 
+    private $autor;
     private $assunto;
     private $status; 
     private $anexo;
@@ -11,12 +12,20 @@ class ProjetoDeLeiOrdinaria
     public function __construct($numeroLei, $autor, $assunto, $status, $anexo)
     {
         $this->numeroLei = $numeroLei;
-        $this->autor = $autor;
-        $this->assunto = $assunto;
-        $this->status = $status;
-        $this->anexo = $anexo;
+        $this->autor     = $autor;
+        $this->assunto   = $assunto;
+        $this->status    = $status;
+        $this->anexo     = $anexo;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function setId($id)
+    {   
+        $this->id = $id;
+    }
     public function getNumeroLei()
     {
         return $this->numeroLei;
@@ -37,47 +46,7 @@ class ProjetoDeLeiOrdinaria
     {
         return $this->anexo;
     }
-    
-    
+        
 }
 
-/*
-$prj1 = new ProjetoDeLeiOrdinaria("23/12", "antonio", "temasdas", "Aprovado", "www.sada.csaas/asdsa/dswssd.pdf");
-$prj2 = new ProjetoDeLeiOrdinaria("23/12", "antonio", "temasdas", "Aprovado", "www.sada.csaas/asdsa/dswssd.pdf");
-$prj3 = new ProjetoDeLeiOrdinaria("23/12", "antonio", "temasdas", "Aprovado", "www.sada.csaas/asdsa/dswssd.pdf");
-
-$projetos = [];
-$projetosPagina = [];
-$projetosPagina2 = [];
-$projetosPagina3 = [];
-
-$projetosPagina[] = $prj1; 
-$projetosPagina[] = $prj2;
-$projetosPagina[] = $prj3;
-$projetosPagina[] = $prj1; 
-$projetosPagina[] = $prj2;
-$projetosPagina[] = $prj3;
-
-
-$projetosPagina2[] = $prj1; 
-$projetosPagina2[] = $prj2;
-$projetosPagina2[] = $prj3;
-$projetosPagina2[] = $prj1; 
-$projetosPagina2[] = $prj2;
-$projetosPagina2[] = $prj3;
-
-
-$projetosPagina3[] = $prj1; 
-$projetosPagina3[] = $prj2;
-$projetosPagina3[] = $prj3;
-$projetosPagina3[] = $prj1; 
-$projetosPagina3[] = $prj2;
-$projetosPagina3[] = $prj3;
-
-$projetos[] = $projetosPagina;
-$projetos[] = $projetosPagina2;
-$projetos[] = $projetosPagina3;
-
-echo var_dump($projetos);
-*/
 ?>

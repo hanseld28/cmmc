@@ -1,26 +1,30 @@
 <?php
 
-require_once ROOT_PATH . '/model/Extrator.php';
-require_once ROOT_PATH . '/model/FiltradorDeProjetos.php';
+require_once (ROOT_PATH."/cmmc/dao/DAOProjetoDeLeiOrdinaria.php");
 
 class ControllerProjetoDeLeiOrdinaria 
 {
-    public static function buscarTodos()
+    private $daoProjetoDeLeiOrdinaria;
+
+    public function __construct()
     {
-        $projetos = new ArrayObject();
-
-        for($numeroPagina = 0; $numeroPagina < 14; $numeroPagina++)
-        {
-            $extrator = new Extrator("http://www.cmmc.com.br/projetos/plo.php?pg=");
-
-            $extrator->extrairConteudoDePaginaComParametro($numeroPagina);
-
-            $filtrador = new Filtrador();
-
-            $projetos->append($filtrador->filtrarConteudoDaPaginaDeProjetosLO($extrator->getDOM()));
-        }
-        return $projetos;
+        $this->daoProjetoDeLeiOrdinaria = new DAOProjetoDeLeiOrdinaria();
     }
+
+    private function carregarProjetosDeLeiOrdinaria()
+    {
+        $this->daoProjetoDeLeiOrdinaria->carregarProjetosDeLeiOrdinaria();
+    }
+
+    public function recuperarProjetosDeLeiOrdinaria()
+    {
+        if(!file_exists(ARQUIVO_PROJETO_LO))
+        {
+            $this->carregarProjetosDeLeiOrdinaria();
+        }
+        return $this->daoProjetoDeLeiOrdinaria->recuperarListaDeProjetosDoArquivo();
+    }
+
 }
 
 ?>

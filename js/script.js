@@ -8,3 +8,4 @@ var tabs = tabbis.init({
         console.log(pane);
     }
 });
+

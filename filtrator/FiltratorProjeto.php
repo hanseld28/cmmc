@@ -1,8 +1,9 @@
 <?php
 
-require_once ROOT_PATH . '/model/ProjetoDeLeiOrdinaria.php';
+require_once (ROOT_PATH."/cmmc/model/ProjetoDeLeiOrdinaria.php");
+require_once (ROOT_PATH."/cmmc/model/Extrator.php");
 
-class Filtrador
+class FiltratorProjeto
 {
 
     public function filtrarConteudoDaPaginaDeProjetosLO(\DOMDocument $dom)
@@ -20,7 +21,7 @@ class Filtrador
     
     
     private function filtrarDadosNaTabelaDeProjetosLO(\DOMNodeList $linhasTabela, \DOMXPath $domXPath)
-    {    
+    {           
         $listaProjetosVazia = true;
         $projetos = new ArrayObject();
 
@@ -45,10 +46,11 @@ class Filtrador
                         $projetos->append($projeto);
                         $listaProjetosVazia = false;
                     }
-                    else if ($assunto != $projetos->offsetGet($projetos->count() - 1)->getAssunto()) 
+                    else if ($assunto != $projetos->offsetGet($projetos->count() - 1)->getAssunto() && $autor != 'PREFEITO') 
                     {
                         $projetos->append($projeto);
                     }
+                    
                 }
 
             }
@@ -56,6 +58,8 @@ class Filtrador
         }
         return $projetos;
     }
+
+   
 
     
 }
