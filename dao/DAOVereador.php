@@ -80,6 +80,19 @@ class DAOVereador
             }
         }
     }
+    
+    public function classificarProjetosDoVereadorPorStatus()
+    {
+        $listaProjetosDoVereadorPorStatus = new ArrayObject();
+
+        foreach ($this->listaDeVereadores as $vereador)
+        {
+            $vereador->inicializarQuantidadeProjetos();
+            $listaProjetosDoVereadorPorStatus->append($vereador);
+        }
+
+        return $listaProjetosDoVereadorPorStatus;
+    }
 
     
 

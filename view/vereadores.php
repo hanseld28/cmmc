@@ -10,6 +10,7 @@
     $controllerVereador = new ControllerVereador();
 
     $listaDeVereadores = $controllerVereador->recuperarVereadores();
+    $listaDeProjetosDoVereadorPorStatus = $controllerVereador->classificarProjetosDoVereadorPorStatus();
 ?>
 
 
@@ -47,8 +48,43 @@
     </div>
 
     <div>
-        Vereadores | Quantidade de projetos por status...
-    
+        <div class="pure-g">
+            <div class="pure-u-24-24" style="margin-top: -5px; padding: 10px 15px 15px 0px;">
+                <h2>Quantidade de projetos de cada vereador por status</h2>
+            </div>
+        </div>
+
+        
+         <table class="pure-table">
+            <thead>
+                <tr>
+                    <th>NOME DO VEREADOR</th>
+                    <th>APROVADO</th>
+                    <th>EM TRÂMITE</th>
+                    <th>RECUSADO</th>
+                    <th>POR LEI</th>
+                    <th>RETIRADO PELO AUTOR</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+        
+                <?php foreach($listaDeProjetosDoVereadorPorStatus as $i => $vereador): ?>
+                <tr <?php if($i % 2 == 1) echo "class=\"pure-table-odd\"" ?> >
+                    
+                    <td title="NOME DO VEREADOR"> <?php echo $vereador->getNome()              ?>   </td>
+                    <td title="APROVADOS"> <?php echo $vereador->getQuantidadeProjetos()->getAprovado()          ?>   </td>
+                    <td title="EM TRÂMITE"> <?php echo $vereador->getQuantidadeProjetos()->getEmTramite()         ?>   </td>
+                    <td title="RECUSADOS"> <?php echo $vereador->getQuantidadeProjetos()->getRecusado()          ?>   </td>
+                    <td title="POR LEIS"> <?php echo $vereador->getQuantidadeProjetos()->getPorLei()            ?>   </td>
+                    <td title="RETIRADO PELO AUTOR"> <?php echo $vereador->getQuantidadeProjetos()->getRetiradoPeloAutor() ?>   </td>
+                    <td title="QUANTIDADE TOTAL"> <?php echo $vereador->getQuantidadeProjetos()->getTotal()             ?>   </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
     </div>
 </div>
 
